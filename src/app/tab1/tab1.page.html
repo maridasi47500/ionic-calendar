@@ -1,17 +1,37 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 1
-    </ion-title>
-  </ion-toolbar>
+<ion-header>
+	  <ion-toolbar>
+		      <ion-title>
+			            Calendars App
+				        </ion-title>
+					  </ion-toolbar>
 </ion-header>
+<ion-content>
+	  <ion-list class="ios list-ios hydrated">
+		      <ion-list-header class="ios hydrated">
+			            Appointments
+				        </ion-list-header>
+					    <ion-item *ngFor="let booking of Bookings" class="user-list">
+						          <ion-label>
+								          <h5>
+										            <ion-icon name="person"></ion-icon> {{booking.name}}
+											            </h5>
+												            <p>
+													              <ion-icon name="call"></ion-icon> {{booking.mobile}}
+														              </p>
+															            </ion-label>
+																          <div class="item-note" item-end>
+																		          <button ion-button clear [routerLink]="['/edit-appointment/', booking.$key]">
+																				            <ion-icon name="create" style="zoom:2.0"></ion-icon>
+																					            </button>
+																						            <button ion-button clear (click)="deleteBooking(booking.$key)">
+																								              <ion-icon name="trash" style="zoom:2.0"></ion-icon>
+																									              </button>
+																										            </div>
+																											        </ion-item>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
+																												  </ion-list>
+																												    <div id="map" (click)="onclickmap($event)" style="height:100%;"></div>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
-</ion-content>
+																						            <button ion-button clear (click)="createapt()">
+																								              <ion-icon name="calendar" style="zoom:2.0"></ion-icon>
+																									              </button>
