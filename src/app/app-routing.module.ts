@@ -15,7 +15,7 @@ const routes: Routes = [
     loadChildren: () => import('./edit-appointment/edit-appointment.module').then( m => m.EditAppointmentPageModule)
   },
   {
-    path: 'show-appointment',
+    path: 'appointments/:id',
     loadChildren: () => import('./show-appointment/show-appointment.module').then( m => m.ShowAppointmentPageModule)
   }
 ];

@@ -6,6 +6,14 @@
 					  </ion-toolbar>
 </ion-header>
 <ion-content>
+
+		                                       <div class="map_container">
+
+							                                               <div id="map"></div>
+
+												                                             </div>
+
+
 	  <ion-list class="ios list-ios hydrated">
 		      <ion-list-header class="ios hydrated">
 			            Appointments
@@ -30,8 +38,9 @@
 																											        </ion-item>
 
 																												  </ion-list>
-																												    <div id="map" (click)="onclickmap($event)" style="height:100%;"></div>
+
+
 
 																						            <button ion-button clear (click)="createapt()">
-																								              <ion-icon name="calendar" style="zoom:2.0"></ion-icon>
+																								              créer un rdv <ion-icon name="calendar" style="zoom:2.0"></ion-icon>
 																									              </button>
