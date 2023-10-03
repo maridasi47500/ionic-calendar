@@ -20,9 +20,16 @@ export class ShowAppointmentPage implements OnInit {
   ) {
     this.id = this.actRoute.snapshot.paramMap.get('id');
     this.aptService.getBooking(this.id).valueChanges().subscribe(res => {
+	    console.log(res)
       this.rdv = res;
     });
   }
   ngOnInit() {
   }
+    deleteBooking(id: any) {
+	        console.log(id);
+		    if (window.confirm('Do you really want to delete?')) {
+			          this.aptService.deleteBooking(id);
+				      }
+				        }
 }

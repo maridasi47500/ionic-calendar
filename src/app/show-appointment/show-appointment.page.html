@@ -8,4 +8,24 @@
 	<h1>{{rdv.name}}</h1>
 	<p>{{rdv.email}}</p>
 	<p>{{rdv.mobile}}</p>
+	<p>
+	 <button ion-button clear [routerLink]="['/edit-appointment/', id]">
+		 edit rdv
+
+		                                                                                               <ion-icon name="create" style="zoom:2.0"></ion-icon>
+
+													                                                                                                             </button>
+	</p>
+	<p>
+
+
+																										                                                                                                           <button ion-button clear (click)="deleteBooking(id)">
+	supprimer rdv
+
+
+																																								                  <ion-icon name="trash" style="zoom:2.0"></ion-icon>
+
+
+																																										                         </button>
+	</p>
 </ion-content>

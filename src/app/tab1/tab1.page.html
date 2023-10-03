@@ -1,46 +1,47 @@
 <ion-header>
-	  <ion-toolbar>
-		      <ion-title>
-			            Calendars App
-				        </ion-title>
-					  </ion-toolbar>
-</ion-header>
+	         <ion-toolbar>
+		                     <ion-title>
+			                                   Calendars App
+			                                       </ion-title>
+		                                         </ion-toolbar>
+	</ion-header>
 <ion-content>
+	
+	                                                      <div class="map_container">
+	
+                                                                                                      <div id="map"></div>
+		
+		                                                                                                                                            </div>
 
-		                                       <div class="map_container">
-
-							                                               <div id="map"></div>
-
-												                                             </div>
-
-
-	  <ion-list class="ios list-ios hydrated">
-		      <ion-list-header class="ios hydrated">
-			            Appointments
-				        </ion-list-header>
-					    <ion-item *ngFor="let booking of Bookings" class="user-list">
-						          <ion-label>
-								          <h5>
-										            <ion-icon name="person"></ion-icon> {{booking.name}}
-											            </h5>
-												            <p>
-													              <ion-icon name="call"></ion-icon> {{booking.mobile}}
-														              </p>
-															            </ion-label>
-																          <div class="item-note" item-end>
-																		          <button ion-button clear [routerLink]="['/edit-appointment/', booking.$key]">
-																				            <ion-icon name="create" style="zoom:2.0"></ion-icon>
-																					            </button>
-																						            <button ion-button clear (click)="deleteBooking(booking.$key)">
-																								              <ion-icon name="trash" style="zoom:2.0"></ion-icon>
-																									              </button>
-																										            </div>
-																											        </ion-item>
-
-																												  </ion-list>
-
-
-
-																						            <button ion-button clear (click)="createapt()">
-																								              créer un rdv <ion-icon name="calendar" style="zoom:2.0"></ion-icon>
-																									              </button>
+	
+	         <ion-list class="ios list-ios hydrated">
+		                     <ion-list-header class="ios hydrated">
+			                                   Appointments
+			                                       </ion-list-header>
+		                                           <ion-item *ngFor="let booking of Bookings" class="user-list">
+			                                                         <ion-label>
+				                                                                         <h5>
+					-                                                                                           <ion-icon name="person"></ion-icon> {{booking.name}}
+					-                                                                                                   </h5>
+				                                                                                                           <p>
+				                                                                                                                     <ion-icon name="call"></ion-icon> {{booking.mobile}}
+				                                                                                                                             </p>
+				                                                                                                                                   </ion-label>
+			                                                                                                                                         <div class="item-note" item-end>
+				                                                                                                                                                         <button ion-button clear [routerLink]="['/edit-appointment/', booking.$key]">
+					                                                                                                                                                                           <ion-icon name="create" style="zoom:2.0"></ion-icon>
+					                                                                                                                                                                                   </button>
+				                                                                                                                                                                                           <button ion-button clear (click)="deleteBooking(booking.$key)">
+					                                                                                                                                                                                                                 <ion-icon name="trash" style="zoom:2.0"></ion-icon>
+					                                                                                                                                                                                                                         </button>
+				                                                                                                                                                                                                                               </div>
+			                                                                                                                                                                                                                                   </ion-item>
+		
+	                                                                                                                                                                                                                                     </ion-list>
+	
+				                                                                                                           <p>
+				                                                                                                                                                         <button ion-button clear [routerLink]="['/make-appointment/']">
+					                                                                                                                                                                           ajouter un évènement <ion-icon name="create" style="zoom:2.0"></ion-icon>
+					                                                                                                                                                                                   </button>
+				                                                                                                                             </p>
+</ion-content>
