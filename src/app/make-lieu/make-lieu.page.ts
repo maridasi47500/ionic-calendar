@@ -1,26 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { AppointmentService } from './../shared/appointment.service';
+import { LieuService } from './../shared/lieu.service';
 import { PaysService } from './../shared/pays.service';
 import { Pays } from './../shared/Pays';
-import { LieuService } from './../shared/lieu.service';
-import { Lieu } from './../shared/Lieu';
 import * as  L from 'leaflet';
 import { Map, tileLayer, marker, icon } from 'leaflet';
 @Component({
-  selector: 'app-make-appointment',
-  templateUrl: './make-appointment.page.html',
-  styleUrls: ['./make-appointment.page.scss'],
+  selector: 'app-make-lieu',
+  templateUrl: './make-lieu.page.html',
+  styleUrls: ['./make-lieu.page.scss'],
 })
-export class MakeAppointmentPage implements OnInit {
-  bookingForm: FormGroup;
+export class MakeLieuPage implements OnInit {
+  lieuForm: FormGroup;
   Countries: any = [];
-  Lieux: any = [];
   constructor(
-    private lieuService: LieuService,
     private countryService: PaysService,
-    private aptService: AppointmentService,
+    private aptService: LieuService,
     private router: Router,
     public fb: FormBuilder
   ) { }
@@ -28,14 +24,6 @@ export class MakeAppointmentPage implements OnInit {
   customMarkerIcon: any;
   popup: any;
   mymarker: any;
-  fetchLieux() {
-    this.lieuService
-      .getLieuList()
-      .valueChanges()
-      .subscribe((res: any) => {
-        console.log(res);
-      });
-  }
   fetchCountries() {
     this.countryService
       .getPaysList()
@@ -64,18 +52,14 @@ export class MakeAppointmentPage implements OnInit {
       ':' + pad(Math.abs(tzo) % 60);
   }
   ngOnInit() {
-    this.bookingForm = this.fb.group({
+    this.lieuForm = this.fb.group({
       name: [''],
-      email: [''],
-      mobile: [''],
-      date: [this.toIsoString(new Date())],
       lat: [''],
       lon: [''],
       pays_id: [''],
-      lieu_id: [''],
     });
     if (!this.map) {
-      this.map = new L.Map('other_map').setView([33.6396965, -84.4304574], 23);
+      this.map = new L.Map('make_lieu_map').setView([33.6396965, -84.4304574], 23);
     }
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
@@ -94,22 +78,6 @@ export class MakeAppointmentPage implements OnInit {
     });
     this.map.on('click', this.onclickmap);
     this.map.invalidateSize();
-    this.fetchLieux();
-    let lieuRes = this.lieuService.getLieuList();
-    lieuRes.snapshotChanges().subscribe((res: any) => {
-      this.Lieux = [];
-      res.forEach((item: any) => {
-
-        let a: any = item.payload.toJSON();
-        let restaurant = a;
-        a['$key'] = item.key;
-        this.Lieux.push(a as Lieu);
-
-      });
-      setTimeout(() => {
-        this.map.invalidateSize();
-      }, 0);
-    });
     this.fetchCountries();
     let paysRes = this.countryService.getPaysList();
     paysRes.snapshotChanges().subscribe((res: any) => {
@@ -128,14 +96,14 @@ export class MakeAppointmentPage implements OnInit {
     });
   }
   formSubmit() {
-    if (!this.bookingForm.valid) {
+    if (!this.lieuForm.valid) {
       return false;
     } else {
       return this.aptService
-        .createBooking(this.bookingForm.value)
+        .createBooking(this.lieuForm.value)
         .then((res) => {
           console.log(res);
-          this.bookingForm.reset();
+          this.lieuForm.reset();
           this.router.navigate(['/']);
         })
         .catch((error) => console.log(error));
@@ -149,9 +117,9 @@ export class MakeAppointmentPage implements OnInit {
 
     console.log(e, e.latlng, latitude, longitude);
 
-    this.bookingForm.controls['lat'].setValue(latitude);
-    this.bookingForm.controls['lon'].setValue(longitude);
-    this.bookingForm.enable();
+    this.lieuForm.controls['lat'].setValue(latitude);
+    this.lieuForm.controls['lon'].setValue(longitude);
+    this.lieuForm.enable();
     this.addpopup(e.latlng);
 
 

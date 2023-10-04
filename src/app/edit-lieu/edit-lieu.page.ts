@@ -1,16 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { FormGroup, FormBuilder } from "@angular/forms";
-import { AppointmentService } from './../shared/appointment.service';
+import { LieuService } from './../shared/lieu.service';
+import { PaysService } from './../shared/pays.service';
+import { Pays } from './../shared/Pays';
 import * as  L from 'leaflet';
 import { Map, tileLayer, marker, icon } from 'leaflet';
 @Component({
-  selector: 'app-edit-appointment',
-  templateUrl: './edit-appointment.page.html',
-  styleUrls: ['./edit-appointment.page.scss'],
+  selector: 'app-edit-lieu',
+  templateUrl: './edit-lieu.page.html',
+  styleUrls: ['./edit-lieu.page.scss'],
 })
-export class EditAppointmentPage implements OnInit {
-  updateBookingForm: FormGroup;
+export class EditLieuPage implements OnInit {
+  updateLieuForm: FormGroup;
   id: any;
   map: any;
   customMarkerIcon: any = icon({
@@ -23,31 +25,30 @@ export class EditAppointmentPage implements OnInit {
   mymarker: any;
   myapt: boolean = false;
   constructor(
-    private aptService: AppointmentService,
+    private paysService: PaysService,
+    private lieuService: LieuService,
     private actRoute: ActivatedRoute,
     private router: Router,
     public fb: FormBuilder
   ) {
     this.id = this.actRoute.snapshot.paramMap.get('id');
-    this.aptService.getBooking(this.id).valueChanges().subscribe(res => {
-      this.updateBookingForm.setValue(res);
+    this.lieuService.getLieu(this.id).valueChanges().subscribe(res => {
+      this.updateLieuForm.setValue(res);
 
       console.log({ lat: res.lat, lng: res.lon });
       this.addpopup({ lat: res.lat, lng: res.lon });
     });
   }
   ngOnInit() {
-    this.updateBookingForm = this.fb.group({
+    this.updateLieuForm = this.fb.group({
       name: [''],
       email: [''],
       date: [''],
       lat: [''],
       lon: [''],
-      pays_id: [''],
-      lieu_id: [''],
       mobile: ['']
     })
-    console.log(this.updateBookingForm.value)
+    console.log(this.updateLieuForm.value)
     if (!this.map) {
       this.map = new L.Map('my_map').setView([33.6396965, -84.4304574], 23);
     }
@@ -56,7 +57,7 @@ export class EditAppointmentPage implements OnInit {
       maxZoom: 19
     }).addTo(this.map);
     if (!this.mymarker && !this.myapt) {
-      this.addpopup({ lat: this.updateBookingForm.value.lat, lng: this.updateBookingForm.value.lon });
+      this.addpopup({ lat: this.updateLieuForm.value.lat, lng: this.updateLieuForm.value.lon });
     }
     setTimeout(() => {
       this.map.invalidateSize();
@@ -68,7 +69,7 @@ export class EditAppointmentPage implements OnInit {
     this.map.invalidateSize();
   }
   updateForm() {
-    this.aptService.updateBooking(this.id, this.updateBookingForm.value)
+    this.lieuService.updateLieu(this.id, this.updateLieuForm.value)
       .then(() => {
         this.router.navigate(['/']);
       })
@@ -82,9 +83,9 @@ export class EditAppointmentPage implements OnInit {
 
     console.log(e, e.latlng, latitude, longitude);
 
-    this.updateBookingForm.controls['lat'].setValue(latitude);
-    this.updateBookingForm.controls['lon'].setValue(longitude);
-    this.updateBookingForm.enable();
+    this.updateLieuForm.controls['lat'].setValue(latitude);
+    this.updateLieuForm.controls['lon'].setValue(longitude);
+    this.updateLieuForm.enable();
     this.addpopup(e.latlng);
 
 

@@ -1,0 +1,30 @@
+<ion-header>
+	  <ion-toolbar>
+		      <ion-back-button></ion-back-button>
+		        </ion-toolbar>
+</ion-header>
+
+<ion-content text-center>
+	<h1>{{rdv.name}}</h1>
+	<p>{{rdv.nompays}}</p>
+	<p>
+	 <button ion-button clear [routerLink]="['/edit-lieu/', id]">
+		 edit rdv
+
+		                                                                                               <ion-icon name="create" style="zoom:2.0"></ion-icon>
+
+													                                                                                                             </button>
+	</p>
+	<p>
+
+
+																										                                                                                                           <button ion-button clear (click)="deleteLieu(id)">
+	supprimer rdv
+
+
+																																								                  <ion-icon name="trash" style="zoom:2.0"></ion-icon>
+
+
+																																										                         </button>
+	</p>
+</ion-content>

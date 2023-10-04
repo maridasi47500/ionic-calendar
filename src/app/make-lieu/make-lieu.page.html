@@ -1,40 +1,30 @@
 <ion-header>
 	  <ion-toolbar class="ios hydrated">
 			                        <ion-back-button></ion-back-button>
-						<ion-title class="ios title-ios hydrated"> Booking</ion-title>
+						<ion-title class="ios title-ios hydrated"> ajouter un Lieu</ion-title>
 
 						                        </ion-toolbar>
 </ion-header>
 <ion-content>
 
-				                                             <div class="other_map_container">
+				                                             <div class="make_lieu_map_container">
 
-										                                             <div id="other_map"></div>
+										                                             <div id="make_lieu_map"></div>
 
 															                                           </div>
 
 
 	  <ion-list lines="full">
-		      <form [formGroup]="bookingForm" (ngSubmit)="formSubmit()">
+		      <form [formGroup]="lieuForm" (ngSubmit)="formSubmit()">
 			       <ion-item>
 
 
 
 																				                                           </ion-item>
 			            <ion-item>
-					            <ion-label position="floating">Date</ion-label>
-						            <ion-datetime formControlName="date" required></ion-datetime>
-							          </ion-item>
-			            <ion-item>
 					            <ion-label position="floating">Name</ion-label>
 						            <ion-input formControlName="name" type="text" required></ion-input>
 							          </ion-item>
-								        <ion-item>
-										        <ion-label position="floating">Lieu</ion-label>
-											 <ion-select formControlName="lieu_id" label="lieu" label-placement="stacked">
-												 <ion-select-option *ngFor="let lieu of Lieux" value="{{lieu.$key}}">{{lieu.name}}</ion-select-option>
-														       </ion-select>
-														      </ion-item>
 								        <ion-item>
 										        <ion-label position="floating">Pays</ion-label>
 											 <ion-select formControlName="pays_id" label="pays" label-placement="stacked">
@@ -42,21 +32,11 @@
 														       </ion-select>
 														      </ion-item>
 														            <ion-item>
-										        <ion-label position="floating">Email</ion-label>
-
-
-											        <ion-input formControlName="email" type="text" required>
-													        </ion-input>
 											        <ion-input formControlName="lat" type="hidden" id="lat" >
 													        </ion-input>
 											        <ion-input formControlName="lon" type="hidden" id="lon" >
 													        </ion-input>
 														      </ion-item>
-														            <ion-item>
-																            <ion-label position="floating">Mobile</ion-label>
-																	            <ion-input formControlName="mobile" type="text" required>
-																			            </ion-input>
-																				          </ion-item>
 																					        <ion-row>
 																							        <ion-col>
 																									          <ion-button type="submit" color="primary" shape="full" expand="block">Book Appointment</ion-button>

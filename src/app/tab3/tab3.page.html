@@ -1,17 +1,44 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 3
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-header>
+	         <ion-toolbar>
+		                     <ion-title>
+			                                   Calendars App - Mes lieu
+			                                       </ion-title>
+		                                         </ion-toolbar>
+	</ion-header>
+<ion-content>
+	
+	                                                      <div class="lieu_map_container">
+	
+                                                                                                      <div id="lieu_map"></div>
+		
+		                                                                                                                                            </div>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+	
+	         <ion-list class="ios list-ios hydrated">
+		                     <ion-list-header class="ios hydrated">
+			                                  lieu 
+			                                       </ion-list-header>
+		                                           <ion-item *ngFor="let lieu of Lieux" class="user-list">
+			                                                         <ion-label>
+				                                                                         <h5>
+					-                                                                                           <ion-icon name="map"></ion-icon> {{lieu.name}}
+					-                                                                                                   </h5>
+				                                                                                                                                   </ion-label>
+			                                                                                                                                         <div class="item-note" item-end>
+				                                                                                                                                                         <button ion-button clear [routerLink]="['/edit-lieu/', lieu.$key]">
+					                                                                                                                                                                           <ion-icon name="create" style="zoom:2.0"></ion-icon>
+					                                                                                                                                                                                   </button>
+				                                                                                                                                                                                           <button ion-button clear (click)="deleteLieu(lieu.$key)">
+					                                                                                                                                                                                                                 <ion-icon name="trash" style="zoom:2.0"></ion-icon>
+					                                                                                                                                                                                                                         </button>
+				                                                                                                                                                                                                                               </div>
+			                                                                                                                                                                                                                                   </ion-item>
+		
+	                                                                                                                                                                                                                                     </ion-list>
+	
+				                                                                                                           <p>
+				                                                                                                                                                         <button ion-button clear [routerLink]="['/make-lieu/']">
+					                                                                                                                                                                           ajouter un lieu <ion-icon name="create" style="zoom:2.0"></ion-icon>
+					                                                                                                                                                                                   </button>
+				                                                                                                                             </p>
 </ion-content>

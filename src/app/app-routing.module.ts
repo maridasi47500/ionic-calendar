@@ -29,6 +29,18 @@ const routes: Routes = [
   {
     path: 'pays/:id',
     loadChildren: () => import('./show-pays/show-pays.module').then( m => m.ShowPaysPageModule)
+  },
+  {
+    path: 'make-lieu',
+    loadChildren: () => import('./make-lieu/make-lieu.module').then( m => m.MakeLieuPageModule)
+  },
+  {
+    path: 'lieu/:id',
+    loadChildren: () => import('./show-lieu/show-lieu.module').then( m => m.ShowLieuPageModule)
+  },
+  {
+    path: 'edit-lieu/:id',
+    loadChildren: () => import('./edit-lieu/edit-lieu.module').then( m => m.EditLieuPageModule)
   }
 ];
 @NgModule({
