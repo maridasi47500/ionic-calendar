@@ -1,0 +1,36 @@
+<ion-header>
+	  <ion-toolbar class="ios hydrated">
+			                        <ion-back-button></ion-back-button>
+						<ion-title class="ios title-ios hydrated"> Pays</ion-title>
+
+						                        </ion-toolbar>
+</ion-header>
+<ion-content>
+
+				                                             <div class="an_other_map_container">
+
+										                                             <div id="an_other_map"></div>
+
+															                                           </div>
+
+
+	  <ion-list lines="full">
+		      <form [formGroup]="paysForm" (ngSubmit)="formSubmit()">
+			            <ion-item>
+					            <ion-label position="floating">Name</ion-label>
+						            <ion-input formControlName="name" type="text" required></ion-input>
+							          </ion-item>
+								        <ion-item>
+											        <ion-input formControlName="lat" type="hidden" id="lat" >
+													        </ion-input>
+											        <ion-input formControlName="lon" type="hidden" id="lat" >
+													        </ion-input>
+														      </ion-item>
+																					        <ion-row>
+																							        <ion-col>
+																									          <ion-button type="submit" color="primary" shape="full" expand="block">Ajouter le Pays</ion-button>
+																										          </ion-col>
+																											        </ion-row>
+																												    </form>
+																												      </ion-list>
+</ion-content>

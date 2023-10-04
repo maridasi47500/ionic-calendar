@@ -16,6 +16,12 @@ import { environment } from '../environments/environment';
 import { Http,HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 
+
+import { LOCALE_ID } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
+registerLocaleData(localeFr);
+
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
@@ -25,7 +31,7 @@ import { HttpClientModule } from '@angular/common/http';
       AngularFireStorageModule,
       HttpClientModule,
       AngularFireDatabaseModule,],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },{ provide: LOCALE_ID, useValue: 'fr-FR'},],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

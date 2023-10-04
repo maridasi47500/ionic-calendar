@@ -6,13 +6,9 @@
 
 <ion-content text-center>
 	<h1>{{rdv.name}}</h1>
-	<p>{{rdv.email}}</p>
-	<p>{{rdv.mobile}}</p>
-	<p>{{rdv.date}}</p>
-	<p>{{rdv.nompays}}</p>
 	<p>
-	 <button ion-button clear [routerLink]="['/edit-appointment/', id]">
-		 edit rdv
+	 <button ion-button clear [routerLink]="['/edit-pays/', id]">
+		 edit pays 
 
 		                                                                                               <ion-icon name="create" style="zoom:2.0"></ion-icon>
 
@@ -21,8 +17,8 @@
 	<p>
 
 
-																										                                                                                                           <button ion-button clear (click)="deleteBooking(id)">
-	supprimer rdv
+																										                                                                                                           <button ion-button clear (click)="deletePays(id)">
+	supprimer pays 
 
 
 																																								                  <ion-icon name="trash" style="zoom:2.0"></ion-icon>

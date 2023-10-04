@@ -19,6 +19,8 @@ export class AppointmentService {
 	                   date: apt.date,
 	                         email: apt.email,
 	                               mobile: apt.mobile,
+	                               pays_id: apt.pays_id,
+	                               lieu_id: apt.lieu_id,
 	                                                                                           lat: apt.lat,
 	                                                                                           lon: apt.lon,
 	                                   });
@@ -40,6 +42,8 @@ export class AppointmentService {
 	                                                                                     email: apt.email,
 	                                                                                           mobile: apt.mobile,
 	                                                                                           date: apt.date,
+	                               pays_id: apt.pays_id,
+	                               lieu_id: apt.lieu_id,
 	                                                                                           lat: apt.lat,
 	                                                                                           lon: apt.lon,
 	                                                                                               });

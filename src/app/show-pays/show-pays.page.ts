@@ -1,44 +1,38 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { FormGroup, FormBuilder } from "@angular/forms";
-import { AppointmentService } from './../shared/appointment.service';
 import { PaysService } from './../shared/pays.service';
 import {formatDate} from '@angular/common';
 
 @Component({
-  selector: 'app-show-appointment',
-  templateUrl: './show-appointment.page.html',
-  styleUrls: ['./show-appointment.page.scss'],
+  selector: 'app-show-pays',
+  templateUrl: './show-pays.page.html',
+  styleUrls: ['./show-pays.page.scss'],
 })
-export class ShowAppointmentPage implements OnInit {
+export class ShowPaysPage implements OnInit {
 
-  updateBookingForm: FormGroup;
+  updatePaysForm: FormGroup;
   id: any;
     rdv:any={};
   constructor(
-    private aptService: AppointmentService,
     private paysService: PaysService,
     private actRoute: ActivatedRoute,
     private router: Router
 
   ) {
-   this.id = this.actRoute.snapshot.paramMap.get('id');
-
-    this.aptService.getBooking(this.id).valueChanges().subscribe(res => {
+    this.id = this.actRoute.snapshot.paramMap.get('id');
+    this.paysService.getPays(this.id).valueChanges().subscribe(res => {
 	    console.log(res)
 	    res.date=formatDate(new Date(res.date), 'yyy-MM-dd HH:mm', "fr-FR");
       this.rdv = res;
-    this.paysService.getPays(res.pays_id).valueChanges().subscribe(myres => {
-      this.rdv.nompays = myres.name;
-    });
     });
   }
   ngOnInit() {
   }
-    deleteBooking(id: any) {
+    deletePays(id: any) {
 	        console.log(id);
 		    if (window.confirm('Do you really want to delete?')) {
-			          this.aptService.deleteBooking(id);
+			          this.paysService.deletePays(id);
 				      }
 				        }
 }

@@ -17,6 +17,18 @@ const routes: Routes = [
   {
     path: 'appointments/:id',
     loadChildren: () => import('./show-appointment/show-appointment.module').then( m => m.ShowAppointmentPageModule)
+  },
+  {
+    path: 'edit-pays/:id',
+    loadChildren: () => import('./edit-pays/edit-pays.module').then( m => m.EditPaysPageModule)
+  },
+  {
+    path: 'make-pays',
+    loadChildren: () => import('./make-pays/make-pays.module').then( m => m.MakePaysPageModule)
+  },
+  {
+    path: 'pays/:id',
+    loadChildren: () => import('./show-pays/show-pays.module').then( m => m.ShowPaysPageModule)
   }
 ];
 @NgModule({

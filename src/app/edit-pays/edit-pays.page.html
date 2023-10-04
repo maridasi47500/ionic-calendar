@@ -1,0 +1,34 @@
+<ion-header>
+	  <ion-toolbar>
+		      <ion-title>
+			            Edit Pays
+				        </ion-title>
+					  </ion-toolbar>
+</ion-header>
+<ion-content>
+	  <div class="this_map_container">
+
+		                                                                                                        <div id="this_map"></div>
+
+															                                                                                                                                                            </div>
+
+	  <ion-list lines="full">
+		      <form [formGroup]="updatePaysForm" (ngSubmit)="updateForm()">
+			            <ion-item>
+					            <ion-label position="floating">Name</ion-label>
+						            <ion-input formControlName="name" type="text" required></ion-input>
+							          </ion-item>
+								        <ion-item>
+											        <ion-input formControlName="lat" type="hidden" required>
+													        </ion-input>
+											        <ion-input formControlName="lon" type="hidden" required>
+													        </ion-input>
+														      </ion-item>
+																					        <ion-row>
+																							        <ion-col>
+																									          <ion-button type="submit" color="primary" shape="full" expand="block">Update Pays</ion-button>
+																										          </ion-col>
+																											        </ion-row>
+																												    </form>
+																												      </ion-list>
+</ion-content>

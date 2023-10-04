@@ -8,7 +8,7 @@ npm i typescript-formatter -g
 après
 ```
 
-tsfmt filename
+tsfmt -r filename
 ```
  avec vimm pour enlever les ^^M faire
 ```

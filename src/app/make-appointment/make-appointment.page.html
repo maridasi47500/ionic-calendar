@@ -30,12 +30,22 @@
 						            <ion-input formControlName="name" type="text" required></ion-input>
 							          </ion-item>
 								        <ion-item>
+										        <ion-label position="floating">Pays</ion-label>
+											 <ion-select formControlName="pays_id" label="pays" label-placement="stacked">
+												 <ion-select-option *ngFor="let pays of Countries" value="{{pays.$key}}">{{pays.name}}</ion-select-option>
+														       </ion-select>
+														      </ion-item>
+														            <ion-item>
 										        <ion-label position="floating">Email</ion-label>
+
+
 											        <ion-input formControlName="email" type="text" required>
+													        </ion-input>
+											        <ion-input formControlName="lieu_id" type="hidden" id="tyui">
 													        </ion-input>
 											        <ion-input formControlName="lat" type="hidden" id="lat" >
 													        </ion-input>
-											        <ion-input formControlName="lon" type="hidden" id="lat" >
+											        <ion-input formControlName="lon" type="hidden" id="lon" >
 													        </ion-input>
 														      </ion-item>
 														            <ion-item>

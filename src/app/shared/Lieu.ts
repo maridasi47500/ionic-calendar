@@ -1,9 +1,7 @@
-export class Appointment {
+export class Lieu {
 	    $key: string;
 	        name: string;
-		    email: string
-		    date:any;
-		        mobile: number;
 			lat:number;
 			lon:number;
+			pays_id:string;
 }

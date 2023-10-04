@@ -1,22 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { AppointmentService } from './../shared/appointment.service';
 import { PaysService } from './../shared/pays.service';
-import { Pays } from './../shared/Pays';
 import * as  L from 'leaflet';
 import { Map, tileLayer, marker, icon } from 'leaflet';
 @Component({
-  selector: 'app-make-appointment',
-  templateUrl: './make-appointment.page.html',
-  styleUrls: ['./make-appointment.page.scss'],
+  selector: 'app-make-pays',
+  templateUrl: './make-pays.page.html',
+  styleUrls: ['./make-pays.page.scss'],
 })
-export class MakeAppointmentPage implements OnInit {
-  bookingForm: FormGroup;
-  Countries: any = [];
+export class MakePaysPage implements OnInit {
+  paysForm: FormGroup;
   constructor(
-    private countryService: PaysService,
-    private aptService: AppointmentService,
+    private paysService: PaysService,
     private router: Router,
     public fb: FormBuilder
   ) { }
@@ -24,14 +20,6 @@ export class MakeAppointmentPage implements OnInit {
   customMarkerIcon: any;
   popup: any;
   mymarker: any;
-  fetchCountries() {
-    this.countryService
-      .getPaysList()
-      .valueChanges()
-      .subscribe((res: any) => {
-        console.log(res);
-      });
-  }
 
 
 
@@ -52,18 +40,16 @@ export class MakeAppointmentPage implements OnInit {
       ':' + pad(Math.abs(tzo) % 60);
   }
   ngOnInit() {
-    this.bookingForm = this.fb.group({
+    this.paysForm = this.fb.group({
       name: [''],
       email: [''],
       mobile: [''],
       date: [this.toIsoString(new Date())],
       lat: [''],
       lon: [''],
-      pays_id: [''],
-      lieu_id: [''],
     });
     if (!this.map) {
-      this.map = new L.Map('other_map').setView([33.6396965, -84.4304574], 23);
+      this.map = new L.Map('an_other_map').setView([33.6396965, -84.4304574], 23);
     }
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
@@ -82,33 +68,17 @@ export class MakeAppointmentPage implements OnInit {
     });
     this.map.on('click', this.onclickmap);
     this.map.invalidateSize();
-    this.fetchCountries();
-    let paysRes = this.countryService.getPaysList();
-    paysRes.snapshotChanges().subscribe((res: any) => {
-      this.Countries = [];
-      res.forEach((item: any) => {
-
-        let a: any = item.payload.toJSON();
-        let restaurant = a;
-        a['$key'] = item.key;
-        this.Countries.push(a as Pays);
-
-      });
-      setTimeout(() => {
-        this.map.invalidateSize();
-      }, 0);
-    });
   }
   formSubmit() {
-    if (!this.bookingForm.valid) {
+    if (!this.paysForm.valid) {
       return false;
     } else {
-      return this.aptService
-        .createBooking(this.bookingForm.value)
+      return this.paysService
+        .createPays(this.paysForm.value)
         .then((res) => {
           console.log(res);
-          this.bookingForm.reset();
-          this.router.navigate(['/']);
+          this.paysForm.reset();
+          this.router.navigate(['/tabs/tab2']);
         })
         .catch((error) => console.log(error));
     }
@@ -119,11 +89,11 @@ export class MakeAppointmentPage implements OnInit {
 
     var longitude = e.latlng.lng;
 
-    console.log(e, e.latlng, latitude, longitude);
+    console.log(e,e.latlng, latitude, longitude);
 
-    this.bookingForm.controls['lat'].setValue(latitude);
-    this.bookingForm.controls['lon'].setValue(longitude);
-    this.bookingForm.enable();
+    this.paysForm.controls['lat'].setValue(latitude);
+    this.paysForm.controls['lon'].setValue(longitude);
+    this.paysForm.enable();
     this.addpopup(e.latlng);
 
 

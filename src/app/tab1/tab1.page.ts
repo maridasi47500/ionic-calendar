@@ -59,7 +59,11 @@ export class Tab1Page implements OnInit {
         setTimeout(() => {
           this.map.invalidateSize();
         }, 0);
+
       });
+        setTimeout(() => {
+          this.map.invalidateSize();
+        }, 0);
     });
   }
   fetchBookings() {
