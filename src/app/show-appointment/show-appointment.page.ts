@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { FormGroup, FormBuilder } from "@angular/forms";
 import { AppointmentService } from './../shared/appointment.service';
 import { PaysService } from './../shared/pays.service';
+import { LieuService } from './../shared/lieu.service';
 import {formatDate} from '@angular/common';
 
 @Component({
@@ -18,6 +19,7 @@ export class ShowAppointmentPage implements OnInit {
   constructor(
     private aptService: AppointmentService,
     private paysService: PaysService,
+    private lieuService: LieuService,
     private actRoute: ActivatedRoute,
     private router: Router
 
@@ -30,6 +32,9 @@ export class ShowAppointmentPage implements OnInit {
       this.rdv = res;
     this.paysService.getPays(res.pays_id).valueChanges().subscribe(myres => {
       this.rdv.nompays = myres.name;
+    });
+    this.lieuService.getLieu(res.lieu_id).valueChanges().subscribe(myres => {
+      this.rdv.nomlieu = myres.name;
     });
     });
   }

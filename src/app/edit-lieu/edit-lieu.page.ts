@@ -12,6 +12,7 @@ import { Map, tileLayer, marker, icon } from 'leaflet';
   styleUrls: ['./edit-lieu.page.scss'],
 })
 export class EditLieuPage implements OnInit {
+  Countries: any = [];
   updateLieuForm: FormGroup;
   id: any;
   map: any;
@@ -39,18 +40,25 @@ export class EditLieuPage implements OnInit {
       this.addpopup({ lat: res.lat, lng: res.lon });
     });
   }
+  fetchCountries() {
+	      this.paysService
+	            .getPaysList()
+		          .valueChanges()
+			        .subscribe((res: any) => {
+					        console.log(res);
+						      });
+						        }
+
   ngOnInit() {
     this.updateLieuForm = this.fb.group({
       name: [''],
-      email: [''],
-      date: [''],
+      pays_id: [''],
       lat: [''],
       lon: [''],
-      mobile: ['']
     })
     console.log(this.updateLieuForm.value)
     if (!this.map) {
-      this.map = new L.Map('my_map').setView([33.6396965, -84.4304574], 23);
+      this.map = new L.Map('edit_lieu_map').setView([33.6396965, -84.4304574], 23);
     }
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
@@ -62,6 +70,22 @@ export class EditLieuPage implements OnInit {
     setTimeout(() => {
       this.map.invalidateSize();
     }, 0);
+      this.fetchCountries();
+          let paysRes = this.paysService.getPaysList();
+	      paysRes.snapshotChanges().subscribe((res: any) => {
+		            this.Countries = [];
+			          res.forEach((item: any) => {
+
+					          let a: any = item.payload.toJSON();
+						          let restaurant = a;
+							          a['$key'] = item.key;
+								          this.Countries.push(a as Pays);
+
+									        });
+										      setTimeout(() => {
+											              this.map.invalidateSize();
+												            }, 0);
+													        });
 
 
 

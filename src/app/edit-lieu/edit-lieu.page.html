@@ -15,10 +15,6 @@
 	  <ion-list lines="full">
 		      <form [formGroup]="updateLieuForm" (ngSubmit)="updateForm()">
 			            <ion-item>
-					            <ion-label position="floating">Date</ion-label>
-						            <ion-datetime formControlName="date" required></ion-datetime>
-							          </ion-item>
-			            <ion-item>
 					            <ion-label position="floating">Name</ion-label>
 						            <ion-input formControlName="name" type="text" required></ion-input>
 							          </ion-item>
@@ -28,20 +24,12 @@
 																																                                                                                                     <ion-select-option *ngFor="let pays of Countries" value="{{pays.$key}}">{{pays.name}}</ion-select-option>
 																																												                                                                                                                            </ion-select>
 																																																											                                                                                                                          </ion-item>
-								        <ion-item>
-										        <ion-label position="floating">Email</ion-label>
-											        <ion-input formControlName="email" type="text" required>
-													        </ion-input>
+																																																											                                                                                                                          <ion-item>
 											        <ion-input formControlName="lat" type="hidden" required>
 													        </ion-input>
 											        <ion-input formControlName="lon" type="hidden" required>
 													        </ion-input>
 														      </ion-item>
-														            <ion-item>
-																            <ion-label position="floating">Mobile</ion-label>
-																	            <ion-input formControlName="mobile" type="text" required>
-																			            </ion-input>
-																				          </ion-item>
 																					        <ion-row>
 																							        <ion-col>
 																									          <ion-button type="submit" color="primary" shape="full" expand="block">Update Lieu</ion-button>

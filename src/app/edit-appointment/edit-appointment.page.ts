@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { FormGroup, FormBuilder } from "@angular/forms";
 import { AppointmentService } from './../shared/appointment.service';
+import { PaysService } from './../shared/pays.service';
+import { Pays } from './../shared/Pays';
 import * as  L from 'leaflet';
 import { Map, tileLayer, marker, icon } from 'leaflet';
 @Component({
@@ -11,6 +13,7 @@ import { Map, tileLayer, marker, icon } from 'leaflet';
 })
 export class EditAppointmentPage implements OnInit {
   updateBookingForm: FormGroup;
+    Countries: any = [];
   id: any;
   map: any;
   customMarkerIcon: any = icon({
@@ -23,6 +26,7 @@ export class EditAppointmentPage implements OnInit {
   mymarker: any;
   myapt: boolean = false;
   constructor(
+    private paysService: PaysService,
     private aptService: AppointmentService,
     private actRoute: ActivatedRoute,
     private router: Router,
@@ -36,6 +40,15 @@ export class EditAppointmentPage implements OnInit {
       this.addpopup({ lat: res.lat, lng: res.lon });
     });
   }
+    fetchCountries() {
+	                  this.paysService
+			                      .getPaysList()
+					                                .valueChanges()
+									                                .subscribe((res: any) => {
+														                                                console.log(res);
+																				                                                      });
+																										                                                              }
+
   ngOnInit() {
     this.updateBookingForm = this.fb.group({
       name: [''],
@@ -63,6 +76,22 @@ export class EditAppointmentPage implements OnInit {
     }, 0);
 
 
+      this.fetchCountries();
+          let paysRes = this.paysService.getPaysList();
+	      paysRes.snapshotChanges().subscribe((res: any) => {
+		            this.Countries = [];
+			          res.forEach((item: any) => {
+
+					          let a: any = item.payload.toJSON();
+						          let restaurant = a;
+							          a['$key'] = item.key;
+								          this.Countries.push(a as Pays);
+
+									        });
+										      setTimeout(() => {
+											              this.map.invalidateSize();
+												            }, 0);
+													        });
 
     this.map.on('click', this.onclickmap);
     this.map.invalidateSize();

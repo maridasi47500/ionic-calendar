@@ -52,7 +52,7 @@ export class Tab3Page implements OnInit {
         a['$key'] = item.key;
         this.Lieux.push(a as Lieu);
         var homemarker = L.marker([restaurant.lat, restaurant.lon], { draggable: true, icon: this.customMarkerIcon })
-          .on('click', () => this.router.navigateByUrl('/pays/' + item.key))
+          .on('click', () => this.router.navigateByUrl('/lieu/' + item.key))
           .bindPopup(`<b>${restaurant.name}</b>`, { autoClose: false, closeButton: true });
         homemarker.addTo(this.map).openPopup();
         setTimeout(() => {

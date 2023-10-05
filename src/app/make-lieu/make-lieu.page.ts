@@ -100,13 +100,13 @@ export class MakeLieuPage implements OnInit {
       return false;
     } else {
       return this.aptService
-        .createBooking(this.lieuForm.value)
-        .then((res) => {
+        .createLieu(this.lieuForm.value)
+        .then((res: any) => {
           console.log(res);
           this.lieuForm.reset();
           this.router.navigate(['/']);
         })
-        .catch((error) => console.log(error));
+        .catch((error: any) => console.log(error));
     }
   }
   onclickmap = (e: any) => {
