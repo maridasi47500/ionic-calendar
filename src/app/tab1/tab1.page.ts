@@ -61,6 +61,9 @@ export class Tab1Page implements OnInit {
         }, 0);
 
       });
+      var d = new Date();
+      d.setHours(0,0,0,0);
+      this.Bookings=this.Bookings.filter((x:any)=>new Date(x.date) > d)
         setTimeout(() => {
           this.map.invalidateSize();
         }, 0);
